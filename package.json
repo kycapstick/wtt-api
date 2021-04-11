@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon --watch index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "migrate": "cd migrations && node all-migrations.js"
+    "migrate": "cd migrations && node --trace-warnings allMigrations.js",
+    "seed": "npm run migrate && cd seeders && node --trace-warnings allSeeders.js"
   },
   "author": "kycapstick",
   "license": "ISC",

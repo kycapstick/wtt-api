@@ -4,17 +4,21 @@ const db = require('../db');
 module.exports.performersUp = () => {
     return new Promise((resolve, reject) => {
 
-        let createPerformers = `create table if not exists performers(
-                            id int primary key auto_increment,
-                            title varchar(255)not null,
-                            completed tinyint(1) not null default 0
+        let createPerformers = `CREATE TABLE IF NOT EXISTS performers(
+                            id INT PRIMARY KEY AUTO_INCREMENT,
+                            created DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                            updated DATETIME on UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                            name TEXT NOT NULL,
+                            bio TEXT NOT NULL,
+                            accent_color TEXT NULL,
+                            tips TEXT NULL
                         )`;
 
         db.query(createPerformers, function(err, results, fields) {
             if (err) {
                 return reject(err.message);
             }
-            return resolve('Table created');
+            return resolve('Performers table created');
         });
     });
     
