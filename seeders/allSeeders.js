@@ -1,6 +1,7 @@
 const db = require('../db');
 const { seedPerformers } = require('./performersSeeds');
 const { seedFamilies } = require('./familiesSeeds');
+const { seedVenues } = require('./venuesSeeds');
 const { seedFamiliesPerformers } = require('./familiesPerformersSeeds');
 
 
@@ -12,6 +13,8 @@ const seedTables = () => {
             status = await seedFamilies();
             console.log(status);
             status = await seedFamiliesPerformers();
+            console.log(status);
+            status = await seedVenues();
             console.log(status);
             return resolve('All tables seeded.');
         } catch (err) {
