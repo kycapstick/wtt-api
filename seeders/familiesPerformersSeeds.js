@@ -6,7 +6,7 @@ module.exports.seedFamiliesPerformers = () => {
         let seedFamiliesPerformers = `
                         INSERT INTO families_performers(family_id, performer_id)
                         VALUES
-                        (1, 1),
+                        (1, 2),
                         (2, 2)
                         `;
 

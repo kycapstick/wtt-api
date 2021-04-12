@@ -2,7 +2,8 @@ const e = require('express');
 const db = require('../db');
 const { performersUp, performersDown } = require('./performersTable');
 const { familiesUp, familiesDown } = require('./familiesTable');
-const { familiesPerformersUp, familiesPerformersDown } = require('./familiesPerformersTable')
+const { familiesPerformersUp, familiesPerformersDown } = require('./familiesPerformersTable');
+const { venuesUp, venuesDown } = require('./venuesTable');
 
 const up = () => {
     return new Promise(async(resolve, reject) => {
@@ -12,6 +13,8 @@ const up = () => {
             status = await familiesUp();
             console.log(status);
             status = await familiesPerformersUp();
+            console.log(status);
+            status = await venuesUp();
             console.log(status);
             return resolve('All tables created.');
         } catch (err) {
@@ -25,6 +28,8 @@ const down = () => {
     return new Promise(async(resolve, reject) => {
         try {
             let status = await familiesPerformersDown();
+            console.log(status);
+            status = await venuesDown();
             console.log(status);
             status = await performersDown();
             console.log(status);

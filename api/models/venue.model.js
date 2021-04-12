@@ -1,29 +1,33 @@
 const db = require('../../db');
 
-const Family = (family) => {
-    this.name = family.name;
-    this.description = family.description;
-    this.accent_color = family.accent_color;
+const Venue = (venue) => {
+    this.name = venue.name;
+    this.description = venue.description;
+    this.address = venue.address;
+    this.city = venue.city;
+    this.province = venue.province;
+    this.timezone = venue.timezone;
+    this.accessibility_description = venue.accessibility_description;
+    this.accent_color = venue.accent_color;
 }
 
-Family.create = (newFamily, result) => {
-    db.query("INSERT INTO families set ?", newFamily, (err, res) => {
+Venue.create = (newVenue, result) => {
+    db.query("INSERT INTO venues set ?", newVenue, (err, res) => {
         if (err) {
             console.log(err);
             return result(err, null)
         }
-        console.log(res.insertId);
         result(null, res.insertId);
     })
 }
 
-Family.getFamily = (family_id) => {
+Venue.getVenue = (venue_id) => {
     return new Promise((resolve, reject) => {
         try {
             db.query(`
                 SELECT *
-                FROM families AS f
-                WHERE f.id = ${family_id}`, (err, res) => {
+                FROM venues AS v
+                WHERE v.id = ${venue_id}`, (err, res) => {
                     if (err) {
                         return reject(err);
                     }
@@ -37,8 +41,8 @@ Family.getFamily = (family_id) => {
     });
 }
 
-Family.getAllFamilies = (result) => {
-    db.query("SELECT * FROM families", (err, res) => {
+Venue.getAllVenues = (result) => {
+    db.query("SELECT * FROM venues", (err, res) => {
         if (err) {
             console.log(err);
             return result(null, err);
@@ -48,4 +52,4 @@ Family.getAllFamilies = (result) => {
     });
 }
 
-module.exports = Family;
+module.exports = Venue;
