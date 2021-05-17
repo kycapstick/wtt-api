@@ -4,6 +4,7 @@ const { performersUp, performersDown } = require('./performersTable');
 const { familiesUp, familiesDown } = require('./familiesTable');
 const { familiesPerformersUp, familiesPerformersDown } = require('./familiesPerformersTable');
 const { venuesUp, venuesDown } = require('./venuesTable');
+const { eventsUp, eventsDown } = require('./eventsTable');
 
 const up = () => {
     return new Promise(async(resolve, reject) => {
@@ -15,6 +16,8 @@ const up = () => {
             status = await familiesPerformersUp();
             console.log(status);
             status = await venuesUp();
+            console.log(status);
+            status = await eventsUp();
             console.log(status);
             return resolve('All tables created.');
         } catch (err) {
@@ -34,6 +37,8 @@ const down = () => {
             status = await performersDown();
             console.log(status);
             status = await familiesDown();
+            console.log(status);
+            status = await eventsDown();
             console.log(status);
             return resolve('All tables dropped.')
         } catch (err) {

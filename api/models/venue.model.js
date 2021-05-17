@@ -42,14 +42,22 @@ Venue.getVenue = (venue_id) => {
 }
 
 Venue.getAllVenues = (result) => {
-    db.query("SELECT * FROM venues", (err, res) => {
-        if (err) {
-            console.log(err);
-            return result(null, err);
+    return new Promise((resolve, reject) => {
+        try {
+            db.query("SELECT * FROM venues", (err, res) => {
+                if (err) {
+                    console.log(err);
+                    return result(null, err);
+                }
+                result(null, res);
+                return resolve();
+            });
+        } catch (err) {
+            return reject(err);
         }
-        console.log(res);
-        result(null, res);
-    });
+        
+    })
+    
 }
 
 module.exports = Venue;
